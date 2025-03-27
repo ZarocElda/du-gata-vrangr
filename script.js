@@ -24,17 +24,11 @@ items.forEach(item => {
 });
 
 function buyItem(itemId) {
-  fetch(backendUrl, {
-    method: "POST",
-    body: JSON.stringify({
-      discordId: user.discordId,
-      username: user.username,
-      itemId: itemId
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(res => res.text())
-  .then(msg => alert(msg));
+  const url = `${backendUrl}?discordId=${user.discordId}&username=${user.username}&itemId=${itemId}`;
+
+  fetch(url)
+    .then(res => res.text())
+    .then(msg => alert(msg))
+    .catch(err => alert("Error: " + err.message));
 }
+
